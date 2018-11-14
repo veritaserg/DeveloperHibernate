@@ -18,8 +18,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>process-resources</phase>
-                        <goals>
+                                               <goals>
                             <goal>update</goal>
                         </goals>
                     </execution>
