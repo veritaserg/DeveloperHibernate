@@ -4,6 +4,7 @@ public class Account {
     private Long id;
     private String accountData;
 
+public Account(){}
     public Account(Long id, String accountData) {
         this.id = id;
         this.accountData = accountData;

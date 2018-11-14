@@ -10,6 +10,7 @@ public class Developer {
     private Set<Skill> skills;
     private Account account;
 
+    public Developer(){}
     public Developer(Long id, String firstName, String lastName, String specialty, Set<Skill> skills, Account account) {
         this.id = id;
         this.firstName = firstName;
