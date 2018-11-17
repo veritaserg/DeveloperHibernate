@@ -3,19 +3,19 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "SKILLS")
+@Table(name = "skills")
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+        private Long id;
+
     @Column (name = "name")
     private String name;
 
     public Skill(){}
-    public Skill(Long id, String name) {
-        this.id = id;
-        this.name = name;
+    public Skill( String name) {
+               this.name = name;
     }
 
     public Long getId() {

@@ -1,12 +1,21 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "account")
 public class Account {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
+
+    @Column (name = "accountData")
     private String accountData;
 
 public Account(){}
-    public Account(Long id, String accountData) {
-        this.id = id;
+    public Account(String accountData) {
+
         this.accountData = accountData;
     }
 
