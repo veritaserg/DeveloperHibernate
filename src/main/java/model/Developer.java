@@ -21,7 +21,8 @@ public class Developer {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Skill> skills;
 
-    @OneToOne(mappedBy = "developers",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
     public Developer(){}
