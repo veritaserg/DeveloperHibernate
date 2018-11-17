@@ -1,7 +1,15 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "SKILLS")
 public class Skill {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
+    @Column (name = "name")
     private String name;
 
     public Skill(){}
@@ -24,5 +32,13 @@ public class Skill {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

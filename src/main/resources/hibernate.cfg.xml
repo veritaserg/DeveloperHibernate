@@ -19,6 +19,6 @@
         <property name="hibernate.connection.password">
             qwerty123
         </property>
-
+        <mapping class="model.Skill"/>
     </session-factory>
 </hibernate-configuration>
