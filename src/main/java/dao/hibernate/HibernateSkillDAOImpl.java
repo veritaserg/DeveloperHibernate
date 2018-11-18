@@ -32,11 +32,19 @@ public class HibernateSkillDAOImpl implements SkillDAO {
     @Override
     public List<Skill> getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        transaction = session.beginTransaction();
-        List<Skill> skills = session.createQuery("FROM Skill ").list();
-        transaction.commit();
-        session.close();
-        return skills;
+        Transaction transaction;
+        List<Skill> skills = null;
+        try {
+            transaction = session.beginTransaction();
+            skills = session.createQuery("FROM Skill ").list();
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("error at getAll");
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+            return skills;
+        }
     }
 }
