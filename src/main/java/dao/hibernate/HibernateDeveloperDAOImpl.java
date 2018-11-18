@@ -5,7 +5,6 @@ import dao.util.HibernateUtil;
 import model.Developer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.util.List;
 
 
@@ -23,7 +22,6 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
             System.out.println("error at create");
         } finally {
             if (session != null && session.isOpen()) {
-
                 session.close();
             }
         }
@@ -48,6 +46,7 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
             return developer;
         }
     }
+
     @Override
     public void update(Developer developer) {
         Session session = null;
@@ -65,24 +64,42 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
             }
         }
     }
+
     @Override
     public void delete(Long developerId) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        transaction = session.beginTransaction();
-        Developer developer = (Developer) session.get(Developer.class, developerId);
-        session.delete(developer);
-        transaction.commit();
-        session.close();
+        Session session = null;
+        Transaction transaction;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Developer developer = (Developer) session.get(Developer.class, developerId);
+            session.delete(developer);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("error at delete ");
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     public List<Developer> getAll() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        transaction = session.beginTransaction();
-        List<Developer> developers = session.createQuery("FROM Developer ").list();
-        transaction.commit();
-        session.close();
-        return developers;
+        Session session = null;
+        Transaction transaction;
+        List<Developer> developers = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            developers = session.createQuery("FROM Developer ").list();
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("error at getAll ");
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+            return developers;
+        }
     }
 }
