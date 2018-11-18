@@ -22,14 +22,6 @@ public class Developer {
     public Developer() {
     }
 
-    public Developer(String firstName, String lastName, String specialty, Account account, Set<Skill> skills) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.specialty = specialty;
-        this.account = account;
-        this.skills = skills;
-    }
-
     public Developer(Long id, String firstName, String lastName, String specialty, Account account, Set<Skill> skills) {
         this.id = id;
         this.firstName = firstName;
