@@ -14,7 +14,7 @@
             jdbc:mysql://127.0.0.1:3306/dev
         </property>
         <property name="hibernate.connection.username">
-            root
+           root
         </property>
         <property name="hibernate.connection.password">
            1234

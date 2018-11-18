@@ -2,7 +2,7 @@ package model;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "skills")
@@ -10,16 +10,7 @@ public class Skill {
 
     private Long id;
     private String name;
-    private Set<Developer> developers;
 
-    @ManyToMany(mappedBy = "skills")
-    public Set<Developer> getDevelopers() {
-        return developers;
-    }
-
-    public void setDevelopers(Set<Developer> developers) {
-        this.developers = developers;
-    }
 
     public Skill() {
     }
