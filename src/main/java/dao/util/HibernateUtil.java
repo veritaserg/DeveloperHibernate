@@ -1,12 +1,9 @@
 package dao.util;
 
-
 import model.Skill;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
 import java.util.List;
 
 
@@ -20,7 +17,6 @@ public class HibernateUtil {
             throw new ExceptionInInitializerError(ex);
         }
     }
-
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
@@ -32,9 +28,5 @@ public class HibernateUtil {
        session.getTransaction().commit();
         session.close();
         System.out.println(skills);
-
-
-
     }
-
 }

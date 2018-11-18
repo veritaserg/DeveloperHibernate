@@ -2,7 +2,6 @@ package view;
 
 import controller.SkillController;
 import model.Skill;
-
 import java.util.List;
 
 public class SkillView {

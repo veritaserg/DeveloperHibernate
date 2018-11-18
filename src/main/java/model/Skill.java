@@ -11,7 +11,6 @@ public class Skill {
     private Long id;
     private String name;
 
-
     public Skill() {
     }
 
@@ -50,7 +49,6 @@ public class Skill {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(getId(), getName());
     }
 
@@ -58,7 +56,6 @@ public class Skill {
     public String toString() {
         return "Skill{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+                ", name='" + name + '\'' + '}';
     }
 }

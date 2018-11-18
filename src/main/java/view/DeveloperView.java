@@ -55,9 +55,9 @@ public class DeveloperView {
                     " || FirstName: " + dev.getFirstName() +
                     " || LastName: " + dev.getLastName() +
                     " || Specialty: " + dev.getSpecialty() +
-                    " || Account:  " + dev.getAccount()+
+                    " || Account:  " + dev.getAccount() +
                     " || Skill:" + dev.getSkills()
-                   );
+            );
         }
     }
 
@@ -77,8 +77,6 @@ public class DeveloperView {
                 ConsoleHelper.writeToConsole("Wrong ID. Try again.\n");
             }
         }
-
-
     }
 
     private Developer createDev(boolean b) {
@@ -111,7 +109,7 @@ public class DeveloperView {
             }
         }
 
-                while (true) {
+        while (true) {
             try {
                 ConsoleHelper.writeToConsole("Input lastname of Developer");
                 lastname = ConsoleHelper.readString();
@@ -145,8 +143,8 @@ public class DeveloperView {
         while (true) {
             try {
                 ConsoleHelper.writeToConsole("Input skill's  of developer: (for finish input 'exit')");
-                                String str;
-                             while (!(str = ConsoleHelper.readString()).equalsIgnoreCase("exit")) {
+                String str;
+                while (!(str = ConsoleHelper.readString()).equalsIgnoreCase("exit")) {
                     {
                         try {
                             skills.add(new Skill(str));
@@ -155,13 +153,11 @@ public class DeveloperView {
                         }
                     }
                 }
-
                 break;
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return new Developer(id,firstname,lastname,specialty,account,skills);
+        return new Developer(id, firstname, lastname, specialty, account, skills);
     }
 }

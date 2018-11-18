@@ -1,4 +1,5 @@
 package dao.hibernate;
+
 import dao.DeveloperDAO;
 import dao.util.HibernateUtil;
 import model.Developer;
@@ -13,15 +14,13 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
     @Override
     public void create(Developer developer) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
+        Transaction transaction;
         try {
-
             transaction = session.beginTransaction();
             session.save(developer);
             transaction.commit();
-
         } catch (Exception e) {
-            System.out.println("Ошибка при вставке");
+            System.out.println("error at create");
         } finally {
             if (session != null && session.isOpen()) {
 
@@ -32,30 +31,44 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
 
     @Override
     public Developer getById(Long developerId) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
+        Developer developer = null;
+        Session session = null;
+        Transaction transaction;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            developer = (Developer) session.get(Developer.class, developerId);
+        } catch (Exception e) {
+            System.out.println("error at getById ");
+        } finally {
+            if (session != null && session.isOpen()) {
 
-        transaction = session.beginTransaction();
-        Developer developer = (Developer) session.get(Developer.class, developerId);
-        return developer;
+                session.close();
+            }
+            return developer;
+        }
     }
-
     @Override
     public void update(Developer developer) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        transaction = session.beginTransaction();
-               session.update(developer);
-        transaction.commit();
-        session.close();
-
+        Session session = null;
+        Transaction transaction;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.update(developer);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("error at update ");
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
-
     @Override
     public void delete(Long developerId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
-
         transaction = session.beginTransaction();
         Developer developer = (Developer) session.get(Developer.class, developerId);
         session.delete(developer);

@@ -21,6 +21,5 @@ public class AccountView {
                     ConsoleHelper.writeToConsole("\n" + "ID = " + account.getId() + " || Account: " + account.getAccountData());
                 }
             }
-
         }
     }

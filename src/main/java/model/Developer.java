@@ -109,10 +109,8 @@ public class Developer {
                 Objects.equals(getLastName(), developer.getLastName()) &&
                 Objects.equals(getSpecialty(), developer.getSpecialty());
     }
-
     @Override
     public int hashCode() {
-
         return Objects.hash(getId(), getFirstName(), getLastName(), getSpecialty());
     }
 
@@ -123,8 +121,6 @@ public class Developer {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", specialty='" + specialty + '\'' +
-                ", account=" + account +
-
-                '}';
+                ", account=" + account + '}';
     }
 }
