@@ -1,40 +1,47 @@
 package model;
 
+import org.hibernate.annotations.*;
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Objects;
 import java.util.Set;
-@Entity
-@Table(name = "developers")
-public class Developer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-    @Column (name = "first_name")
-    private String firstName;
-    @Column (name = "last_name")
-    private  String lastName;
-    @Column (name = "specialty")
-    private String specialty;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "developer_skill", joinColumns = @JoinColumn(name = "developer_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+@Entity
+@Table(name = "DEVELOPERS")
+public class Developer {
+
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String specialty;
+    private Account account;
     private Set<Skill> skills;
 
-    @JoinColumn(name = "account_id")
-    @OneToOne(cascade = CascadeType.ALL)
-    private Account account;
+    public Developer() {
+    }
 
-    public Developer(){}
-    public Developer( String firstName, String lastName, String specialty, Set<Skill> skills, Account account) {
-
+    public Developer(String firstName, String lastName, String specialty, Account account, Set<Skill> skills) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.specialty = specialty;
-        this.skills = skills;
         this.account = account;
+        this.skills = skills;
     }
 
+    public Developer(Long id, String firstName, String lastName, String specialty, Account account, Set<Skill> skills) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.specialty = specialty;
+        this.account = account;
+        this.skills = skills;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -43,6 +50,7 @@ public class Developer {
         this.id = id;
     }
 
+    @Column(name = "FIRSTNAME")
     public String getFirstName() {
         return firstName;
     }
@@ -51,6 +59,7 @@ public class Developer {
         this.firstName = firstName;
     }
 
+    @Column(name = "LASTNAME")
     public String getLastName() {
         return lastName;
     }
@@ -59,6 +68,7 @@ public class Developer {
         this.lastName = lastName;
     }
 
+    @Column(name = "SPECIALTY")
     public String getSpecialty() {
         return specialty;
     }
@@ -67,6 +77,10 @@ public class Developer {
         this.specialty = specialty;
     }
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "developers_skills", joinColumns = @JoinColumn(name = "developer_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id"))
     public Set<Skill> getSkills() {
         return skills;
     }
@@ -75,11 +89,42 @@ public class Developer {
         this.skills = skills;
     }
 
+    @NotFound(action = NotFoundAction.IGNORE)
+    @OneToOne(cascade = CascadeType.ALL)
     public Account getAccount() {
         return account;
     }
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Developer)) return false;
+        Developer developer = (Developer) o;
+        return Objects.equals(getId(), developer.getId()) &&
+                Objects.equals(getFirstName(), developer.getFirstName()) &&
+                Objects.equals(getLastName(), developer.getLastName()) &&
+                Objects.equals(getSpecialty(), developer.getSpecialty());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getId(), getFirstName(), getLastName(), getSpecialty());
+    }
+
+    @Override
+    public String toString() {
+        return "Developer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", specialty='" + specialty + '\'' +
+                ", account=" + account +
+
+                '}';
     }
 }

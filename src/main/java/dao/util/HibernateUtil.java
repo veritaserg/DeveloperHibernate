@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.List;
 
 
 public class HibernateUtil {
@@ -24,5 +25,16 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
+    public static void main(String[] args) {
+        Session session = getSessionFactory().openSession();
+        session.getTransaction().begin();
+        List<Skill> skills =  session.createQuery("FROM Skill ").list();
+       session.getTransaction().commit();
+        session.close();
+        System.out.println(skills);
+
+
+
+    }
 
 }

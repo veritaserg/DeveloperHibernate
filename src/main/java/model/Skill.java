@@ -1,23 +1,36 @@
 package model;
 
 import javax.persistence.*;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "skills")
 public class Skill {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-        private Long id;
 
-    @Column (name = "name")
+    private Long id;
     private String name;
+    private Set<Developer> developers;
 
-    public Skill(){}
-    public Skill( String name) {
-               this.name = name;
+    @ManyToMany(mappedBy = "skills")
+    public Set<Developer> getDevelopers() {
+        return developers;
     }
 
+    public void setDevelopers(Set<Developer> developers) {
+        this.developers = developers;
+    }
+
+    public Skill() {
+    }
+
+    public Skill(String name) {
+        this.name = name;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -26,12 +39,28 @@ public class Skill {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Skill)) return false;
+        Skill skill = (Skill) o;
+        return Objects.equals(getId(), skill.getId()) &&
+                Objects.equals(getName(), skill.getName());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getId(), getName());
     }
 
     @Override
