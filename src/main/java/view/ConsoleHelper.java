@@ -1,5 +1,7 @@
 package view;
 
+import controller.DeveloperController;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +12,7 @@ public class ConsoleHelper {
 
     public void startApp() {
 
-      //  DeveloperController controller = new DeveloperController();
+
         showCommandsMenu();
     }
 
