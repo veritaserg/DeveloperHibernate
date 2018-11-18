@@ -16,8 +16,8 @@
             </column>
             <column name="firstName" type="varchar(50)"/>
             <column name="lastName" type="varchar(50)"/>
-            <column name="specialty" type="varchar(50)">
-                <constraints nullable="false"/>
+            <column name="specialty" type="varchar(50)"/>
+            <column name="account_id" type="int">
             </column>
         </createTable>
     </changeSet>
@@ -27,10 +27,8 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="accountData" type="varchar(50)"/>
-            <column name="developer_id" type="int">
-                <constraints nullable="false"/>
-            </column>
+            <column name="accountData" type="varchar(50)">
+                       </column>
         </createTable>
     </changeSet>
 
@@ -50,9 +48,4 @@
         </createTable>
     </changeSet>
 
-
-    <loadData encoding="UTF-8" file="src/main/resources/org/liquibase/skills.csv" tableName="skills" separator=";">
-        <column name="name" type="STRING"/>
-    </loadData>
-
-</databaseChangeLog>
+    </databaseChangeLog>

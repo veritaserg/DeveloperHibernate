@@ -11,13 +11,13 @@
         </property>
 
         <property name="hibernate.connection.url">
-            jdbc:mysql://127.0.0.1:3306/dev
+            jdbc:mysql://mysqlaws.c05bmdvhonqe.ap-northeast-1.rds.amazonaws.com:3306/developer
         </property>
         <property name="hibernate.connection.username">
-           root
+           admin
         </property>
         <property name="hibernate.connection.password">
-           1234
+           qwerty123
         </property>
 
         <property name="hibernate.id.new_generator_mappings">false</property>
