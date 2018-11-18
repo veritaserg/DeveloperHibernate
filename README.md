@@ -15,4 +15,3 @@ Developer(id, firstName, lastName, specialty, Set<Skill> skills, Account account
 - Для взаимодействия с БД - Hibernate
 - Для конфигурирования Hibernate - аннотации
 - Инициализация БД должна быть реализована с помощью liquibase
-- База данных Amazon RDS
