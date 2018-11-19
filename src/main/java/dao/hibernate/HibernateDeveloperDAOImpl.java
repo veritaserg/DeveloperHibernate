@@ -86,13 +86,12 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
 
     public List<Developer> getAll() {
         Session session = null;
-       Transaction transaction;
         List<Developer> developers = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
+            session.beginTransaction();
             developers = session.createQuery("FROM Developer ").list();
-          transaction.commit();
+          session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("error at getAll ");
         } finally {

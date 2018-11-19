@@ -21,12 +21,4 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public static void main(String[] args) {
-        Session session = getSessionFactory().openSession();
-        session.getTransaction().begin();
-        List<Skill> skills =  session.createQuery("FROM Skill ").list();
-       session.getTransaction().commit();
-        session.close();
-        System.out.println(skills);
-    }
-}
+   }
