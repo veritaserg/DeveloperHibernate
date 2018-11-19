@@ -13,11 +13,11 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
     @Override
     public void create(Developer developer) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction;
+
         try {
-            transaction = session.beginTransaction();
+           session.beginTransaction();
             session.save(developer);
-            transaction.commit();
+            session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("error at create");
         } finally {
