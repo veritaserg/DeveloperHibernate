@@ -1,10 +1,8 @@
 package dao.util;
 
-import model.Skill;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import java.util.List;
+
 
 
 public class HibernateUtil {
