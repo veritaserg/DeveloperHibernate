@@ -4,7 +4,6 @@ import dao.DeveloperDAO;
 import dao.util.HibernateUtil;
 import model.Developer;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import java.util.List;
 
 
@@ -12,10 +11,11 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
 
     @Override
     public void create(Developer developer) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = null;
 
         try {
-           session.beginTransaction();
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
             session.save(developer);
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -31,11 +31,12 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
     public Developer getById(Long developerId) {
         Developer developer = null;
         Session session = null;
-        Transaction transaction;
+
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
+            session.beginTransaction();
             developer = (Developer) session.get(Developer.class, developerId);
+            session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("error at getById ");
         } finally {
@@ -50,12 +51,12 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
     @Override
     public void update(Developer developer) {
         Session session = null;
-        Transaction transaction;
+
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
+            session.beginTransaction();
             session.update(developer);
-            transaction.commit();
+            session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("error at update ");
         } finally {
@@ -68,13 +69,12 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
     @Override
     public void delete(Long developerId) {
         Session session = null;
-        Transaction transaction;
-        try {
+               try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
+            session.beginTransaction();
             Developer developer = (Developer) session.get(Developer.class, developerId);
             session.delete(developer);
-            transaction.commit();
+            session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("error at delete ");
         } finally {
@@ -91,7 +91,7 @@ public class HibernateDeveloperDAOImpl implements DeveloperDAO {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             developers = session.createQuery("FROM Developer ").list();
-          session.getTransaction().commit();
+            session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("error at getAll ");
         } finally {
