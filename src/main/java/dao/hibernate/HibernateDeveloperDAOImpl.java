@@ -3,8 +3,6 @@ package dao.hibernate;
 import dao.AbstractDao;
 import dao.DeveloperDAO;
 import model.Developer;
-
-
 import java.util.List;
 
 

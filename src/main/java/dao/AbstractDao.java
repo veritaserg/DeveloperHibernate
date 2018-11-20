@@ -3,16 +3,18 @@ package dao;
 import dao.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 import java.util.List;
 
 public class AbstractDao<T> {
     private Class<T> tClass;
-   private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     public void settClass(Class<T> tClass) {
         this.tClass = tClass;
     }
-    public void createAbstract(T entity){
+
+    public void createAbstract(T entity) {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -27,6 +29,7 @@ public class AbstractDao<T> {
             }
         }
     }
+
     public T getByIdAbstract(Long id) {
         T entity = null;
         Session session = null;
@@ -87,7 +90,7 @@ public class AbstractDao<T> {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            entity = session.createQuery("FROM "+tClass.getName()).list();
+            entity = session.createQuery("FROM " + tClass.getName()).list();
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("error at getAll ");
