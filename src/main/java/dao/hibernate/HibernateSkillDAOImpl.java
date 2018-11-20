@@ -1,5 +1,6 @@
 package dao.hibernate;
 
+import dao.AbstractDao;
 import dao.SkillDAO;
 import dao.util.HibernateUtil;
 import model.Skill;
@@ -8,7 +9,12 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class HibernateSkillDAOImpl implements SkillDAO {
+public class HibernateSkillDAOImpl extends AbstractDao<Skill> implements SkillDAO {
+
+   public HibernateSkillDAOImpl(){
+       super.settClass(Skill.class);
+   }
+
     @Override
     public void create(Skill skill) {
 
@@ -31,20 +37,6 @@ public class HibernateSkillDAOImpl implements SkillDAO {
 
     @Override
     public List<Skill> getAll() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction;
-        List<Skill> skills = null;
-        try {
-            transaction = session.beginTransaction();
-            skills = session.createQuery("FROM Skill ").list();
-            transaction.commit();
-        } catch (Exception e) {
-            System.out.println("error at getAll");
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-            return skills;
-        }
+       return getAllAbstract();
     }
 }

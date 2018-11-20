@@ -2,14 +2,15 @@ package dao.hibernate;
 
 import dao.AbstractDao;
 import dao.AccountDAO;
-
 import model.Account;
+
 import java.util.List;
 
 public class HibernateAccountDAOImpl extends AbstractDao<Account> implements AccountDAO {
-    public HibernateAccountDAOImpl(){
+    public HibernateAccountDAOImpl() {
         super.settClass(Account.class);
     }
+
     @Override
     public void create(Account account) {
 
@@ -32,6 +33,6 @@ public class HibernateAccountDAOImpl extends AbstractDao<Account> implements Acc
 
     @Override
     public List<Account> getAll() {
-      return getAllAbstract();
+        return getAllAbstract();
     }
 }

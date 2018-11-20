@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class AbstractDao<T> {
+public abstract class AbstractDao<T> {
     private Class<T> tClass;
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
@@ -65,7 +65,6 @@ public class AbstractDao<T> {
             }
         }
     }
-
 
     public void deleteAbstract(Long id) {
         Session session = null;
