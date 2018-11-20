@@ -3,20 +3,19 @@ package dao;
 import dao.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import java.util.List;
 
 public class AbstractDao<T> {
     private Class<T> tClass;
-    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+   private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     public void settClass(Class<T> tClass) {
         this.tClass = tClass;
     }
-    public void create(T entity){
+    public void createAbstract(T entity){
         Session session = null;
         try {
-            session = sessionFactory.openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(entity);
             session.getTransaction().commit();
@@ -28,11 +27,11 @@ public class AbstractDao<T> {
             }
         }
     }
-    public T getById(Long id) {
+    public T getByIdAbstract(Long id) {
         T entity = null;
         Session session = null;
         try {
-            session = sessionFactory.openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             entity = (T) session.get(tClass, id);
             session.getTransaction().commit();
@@ -47,11 +46,11 @@ public class AbstractDao<T> {
     }
 
 
-    public void update(T entity) {
+    public void updateAbstract(T entity) {
         Session session = null;
 
         try {
-            session = sessionFactory.openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.update(entity);
             session.getTransaction().commit();
@@ -65,10 +64,10 @@ public class AbstractDao<T> {
     }
 
 
-    public void delete(Long id) {
+    public void deleteAbstract(Long id) {
         Session session = null;
         try {
-            session = sessionFactory.openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             T entity = (T) session.get(tClass, id);
             session.delete(entity);
@@ -82,11 +81,11 @@ public class AbstractDao<T> {
         }
     }
 
-    public List<T> getAll() {
-        Session session = null;
+    public List<T> getAllAbstract() {
+        Session session = sessionFactory.openSession();
         List<T> entity = null;
         try {
-            session = sessionFactory.openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             entity = session.createQuery("FROM "+tClass.getName()).list();
             session.getTransaction().commit();
