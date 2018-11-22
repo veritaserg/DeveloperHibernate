@@ -17,22 +17,22 @@ public class HibernateSkillDAOImpl extends AbstractDao<Skill> implements SkillDA
 
     @Override
     public void create(Skill skill) {
-
+createAbstract(skill);
     }
 
     @Override
-    public Skill getById(Long aLong) {
-        return null;
+    public Skill getById(Long id) {
+        return getByIdAbstract(id);
     }
 
     @Override
     public void update(Skill skill) {
-
+updateAbstract(skill);
     }
 
     @Override
-    public void delete(Long aLong) {
-
+    public void delete(Long id) {
+deleteAbstract(id);
     }
 
     @Override

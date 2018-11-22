@@ -13,22 +13,22 @@ public class HibernateAccountDAOImpl extends AbstractDao<Account> implements Acc
 
     @Override
     public void create(Account account) {
-
+createAbstract(account);
     }
 
     @Override
-    public Account getById(Long aLong) {
-        return null;
+    public Account getById(Long id) {
+        return getByIdAbstract(id);
     }
 
     @Override
     public void update(Account account) {
-
+updateAbstract(account);
     }
 
     @Override
-    public void delete(Long aLong) {
-
+    public void delete(Long id) {
+deleteAbstract(id);
     }
 
     @Override

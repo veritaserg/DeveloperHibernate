@@ -13,6 +13,11 @@ public class Account {
     public Account() {
     }
 
+    public Account(Long id, String accountData) {
+        this.id = id;
+        this.accountData = accountData;
+    }
+
     public Account(String accountData) {
         this.accountData = accountData;
     }
