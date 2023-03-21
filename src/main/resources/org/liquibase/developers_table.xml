@@ -47,5 +47,4 @@
             <column name="skills_id" type="int"/>
         </createTable>
     </changeSet>
-
     </databaseChangeLog>
