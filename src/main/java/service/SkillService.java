@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SkillService {
     HibernateSkillDAOImpl hibernateSkillDAO;
-    public SkillService(){
+    public SkillService() {
        hibernateSkillDAO = new HibernateSkillDAOImpl();
     }
     public void create(Skill skill) {
